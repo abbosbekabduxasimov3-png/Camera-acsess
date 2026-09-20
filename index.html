@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Camera Access</title>
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Camera Access">
+<meta property="og:description" content="Kamerani ishlatish uchun foydalanuvchi ruxsati kerak.">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+background:#0b0b0f;
+color:white;
+font-family:Arial,sans-serif
+}
+
+.card{
+width:100%;
+max-width:430px;
+padding:28px;
+border-radius:24px;
+background:#1b1b21;
+text-align:center
+}
+
+.icon{
+width:72px;
+height:72px;
+margin:0 auto 18px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:20px;
+background:#6d28d9;
+font-size:34px
+}
+
+h1{
+margin:0 0 10px;
+font-size:28px
+}
+
+p{
+color:#c9c9d0;
+line-height:1.5
+}
+
+button{
+width:100%;
+margin-top:12px;
+padding:15px;
+border:0;
+border-radius:14px;
+background:#7c3aed;
+color:white;
+font-size:17px;
+font-weight:bold
+}
+
+video{
+width:100%;
+margin-top:20px;
+border-radius:16px;
+background:#000;
+display:none
+}
+
+#status{
+margin-top:14px;
+color:#bbb
+}
+
+.note{
+font-size:13px;
+margin-top:18px
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="icon">📷</div>
+
+<h1>Camera Access</h1>
+
+<p>
+Kamerani ochish uchun quyidagi tugmani bosing.
+Brauzer kamera ruxsatini so‘raydi.
+</p>
+
+<button id="start">
+Kameraga ruxsat berish
+</button>
+
+<video id="camera" autoplay playsinline></video>
+
+<div id="status"></div>
+
+<p class="note">
+Kamera faqat sizning ruxsatingizdan keyin ishlaydi.
+</p>
+
+</div>
+
+<script>
+const button=document.getElementById("start");
+const video=document.getElementById("camera");
+const status=document.getElementById("status");
+
+button.addEventListener("click",async()=>{
+
+try{
+
+const stream=await navigator.mediaDevices.getUserMedia({
+video:true,
+audio:false
+});
+
+video.srcObject=stream;
+video.style.display="block";
+
+status.textContent="Kamera ishlayapti.";
+
+button.textContent="Kamera ruxsati berildi";
+button.disabled=true;
+
+}catch(error){
+
+status.textContent=
+"Kamera ruxsati berilmadi yoki kamera mavjud emas.";
+
+console.log(error);
+
+}
+
+});
+</script>
+
+</body>
+</html>
