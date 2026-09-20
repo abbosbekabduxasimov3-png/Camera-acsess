@@ -4,86 +4,80 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Camera Access</title>
+<title>Davom etish</title>
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Camera Access">
-<meta property="og:description" content="Kamerani ishlatish uchun foydalanuvchi ruxsati kerak.">
+<meta property="og:title" content="Davom etish">
+<meta property="og:description" content="Davom etish uchun tugmani bosing.">
 
 <style>
-*{box-sizing:border-box}
-
-body{
-margin:0;
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-background:#0b0b0f;
-color:white;
-font-family:Arial,sans-serif
+* {
+  box-sizing: border-box;
 }
 
-.card{
-width:100%;
-max-width:430px;
-padding:28px;
-border-radius:24px;
-background:#1b1b21;
-text-align:center
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #0b0b0f;
+  color: white;
+  font-family: Arial, sans-serif;
 }
 
-.icon{
-width:72px;
-height:72px;
-margin:0 auto 18px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:20px;
-background:#6d28d9;
-font-size:34px
+.card {
+  width: 100%;
+  max-width: 430px;
+  padding: 28px;
+  border-radius: 24px;
+  background: #1b1b21;
+  text-align: center;
 }
 
-h1{
-margin:0 0 10px;
-font-size:28px
+.icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background: #6d28d9;
+  font-size: 34px;
 }
 
-p{
-color:#c9c9d0;
-line-height:1.5
+h1 {
+  margin: 0 0 10px;
+  font-size: 28px;
 }
 
-button{
-width:100%;
-margin-top:12px;
-padding:15px;
-border:0;
-border-radius:14px;
-background:#7c3aed;
-color:white;
-font-size:17px;
-font-weight:bold
+p {
+  color: #c9c9d0;
+  line-height: 1.5;
 }
 
-video{
-width:100%;
-margin-top:20px;
-border-radius:16px;
-background:#000;
-display:none
+button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 15px;
+  border: 0;
+  border-radius: 14px;
+  background: #7c3aed;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-#status{
-margin-top:14px;
-color:#bbb
+button:active {
+  transform: scale(0.98);
 }
 
-.note{
-font-size:13px;
-margin-top:18px
+#status {
+  margin-top: 14px;
+  color: #bbb;
 }
 </style>
 </head>
@@ -92,60 +86,28 @@ margin-top:18px
 
 <div class="card">
 
-<div class="icon">📷</div>
+  <div class="icon">➜</div>
 
-<h1>Camera Access</h1>
+  <h1>Davom etish</h1>
 
-<p>
-Kamerani ochish uchun quyidagi tugmani bosing.
-Brauzer kamera ruxsatini so‘raydi.
-</p>
+  <p>
+    Davom etish uchun quyidagi tugmani bosing.
+  </p>
 
-<button id="start">
-Kameraga ruxsat berish
-</button>
+  <button id="continueButton">
+    Davom etish
+  </button>
 
-<video id="camera" autoplay playsinline></video>
-
-<div id="status"></div>
-
-<p class="note">
-Kamera faqat sizning ruxsatingizdan keyin ishlaydi.
-</p>
+  <div id="status"></div>
 
 </div>
 
 <script>
-const button=document.getElementById("start");
-const video=document.getElementById("camera");
-const status=document.getElementById("status");
+const button = document.getElementById("continueButton");
+const status = document.getElementById("status");
 
-button.addEventListener("click",async()=>{
-
-try{
-
-const stream=await navigator.mediaDevices.getUserMedia({
-video:true,
-audio:false
-});
-
-video.srcObject=stream;
-video.style.display="block";
-
-status.textContent="Kamera ishlayapti.";
-
-button.textContent="Kamera ruxsati berildi";
-button.disabled=true;
-
-}catch(error){
-
-status.textContent=
-"Kamera ruxsati berilmadi yoki kamera mavjud emas.";
-
-console.log(error);
-
-}
-
+button.addEventListener("click", function() {
+  status.textContent = "Davom etildi.";
 });
 </script>
 
